@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чистый Авто</title>
+    <link rel="stylesheet" href="App.css">
+    <script defer>
+        function toggleServiceDetails(serviceId) {
+            const el = document.getElementById(serviceId);
+            el.style.display = el.style.display === 'block' ? 'none' : 'block';
+        }
+
+        async function handleSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const service = document.getElementById('car').value;
+
+            try {
+                // Здесь можешь вставить реальный fetch на сервер
+                // await fetch('/api/book', { method: 'POST', body: JSON.stringify({ name, phone, service }) });
+                document.getElementById('success').innerText = `Спасибо, ${name}! Вы успешно записались на услугу: ${service}.`;
+                document.getElementById('error').innerText = '';
+                event.target.reset();
+            } catch {
+                document.getElementById('error').innerText = 'Произошла ошибка. Попробуйте снова.';
+                document.getElementById('success').innerText = '';
+            }
+        }
+    </script>
+</head>
+<body>
+
+<header>
+    <div class="navbar">    
+        <div class="logo">Чистый Авто</div>
+        <nav>
+            <ul>
+                <li><a href="#services">Услуги</a></li>
+                <li><a href="#about">О нас</a></li>
+                <li><a href="#contact">Контакты</a></li>
+                <li><a href="#booking">Записаться</a></li>
+            </ul>
+        </nav>
+        <div class="contact-info">+7 (123) 456-78-90</div>
+    </div>
+</header>
+
+<section class="hero">
+    <video autoplay loop muted playsinline class="background-video">
+        <source src="./img/4.mp4" type="video/mp4" />
+        Ваш браузер не поддерживает видео.
+    </video>
+    <div class="hero-content">
+        <h1>Профессиональная мойка авто</h1>
+        <p>Быстрая и качественная мойка автомобиля</p>
+        <a href="#booking" class="btn">Записаться</a>
+    </div>
+</section>
+
+<section id="services" class="services">
+    <h2>Наши лучшие услуги для вас</h2>
+    <div class="service-list">
+        <div class="service-item">
+            <img src="./img/1.jpg" alt="Полный спектр услуг по мойке" />
+            <h3>Мойка кузова</h3>
+            <p>6000 ₸</p>
+            <button class="btn" onclick="toggleServiceDetails('bodyWash')">УЗНАТЬ БОЛЬШЕ</button>
+            <div id="bodyWash" class="service-description" style="display: none;">
+                <p>Мойка кузова включает в себя использование качественных средств для удаления грязи и пыли. Защищает покрытие от внешних факторов.</p>
+            </div>
+        </div>
+        <div class="service-item">
+            <img src="./img/2.jpg" alt="Полировка" />
+            <h3>Полировка</h3>
+            <p>30 000 ₸</p>
+            <button class="btn" onclick="toggleServiceDetails('polishing')">УЗНАТЬ БОЛЬШЕ</button>
+            <div id="polishing" class="service-description" style="display: none;">
+                <p>Полировка восстанавливает блеск и устраняет мелкие дефекты. Используем профессиональные средства.</p>
+            </div>
+        </div>
+        <div class="service-item">
+            <img src="./img/3.jpg" alt="Мойка салона" />
+            <h3>Мойка салона</h3>
+            <p>7000 ₸</p>
+            <button class="btn" onclick="toggleServiceDetails('interiorCleaning')">УЗНАТЬ БОЛЬШЕ</button>
+            <div id="interiorCleaning" class="service-description" style="display: none;">
+                <p>Уборка всех поверхностей: кресел, ковриков, панелей и окон с использованием профессиональных средств.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="about" class="about">
+    <h2>О нас</h2>
+    <p>Мы предоставляем профессиональные услуги по уходу за авто. Наши специалисты гарантируют высокое качество работ.</p>
+</section>
+
+<section id="booking" class="cta">
+    <h2>Запись на мойку</h2>
+    <form onsubmit="handleSubmit(event)">
+        <label for="name">Имя:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="phone">Телефон:</label>
+        <input type="tel" id="phone" name="phone" required><br><br>
+
+        <label for="car">Выбор услуги:</label>
+        <select id="car" name="car" required>
+            <option value="" disabled selected>Выбор услуги</option>
+            <option value="Мойка кузова">Мойка кузова</option>
+            <option value="Чистка салона">Чистка салона</option>
+            <option value="Полировка">Полировка</option>
+        </select><br><br>
+
+        <button type="submit">Отправить</button>
+    </form>
+    <p id="success" class="success-message" style="color: green;"></p>
+    <p id="error" class="error-message" style="color: red;"></p>
+</section>
+
+<section id="location" class="location">
+    <h2>Где мы находимся?</h2>
+    <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2264.699796437481!2d76.90015381592632!3d43.23587677913683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38836914f52c9b5f%3A0x4ce17b08f2a80f2a!2z0YPQuy4g0JDRg9C00L7QstCwIDU3LCDQnNC-0YHQutCy0LAsINCc0L7RgdC60LLQsCwg0JrQuNGX0LIsIDA1MDAwMA!5e0!3m2!1sru!2skz!4v1713698743123!5m2!1sru!2skz"
+        width="100%" height="400" allowfullscreen="" loading="lazy" style="border: 0;">
+    </iframe>
+</section>
+
+<footer>
+    <p>&copy; 2024 Чистый Авто. Все права защищены.</p>
+    <p>Адрес: ул. Толе Би 135, г. Алматы</p>
+    <p>Телефон: +7 (123) 456-78-90</p>
+    <p>Email: <a href="mailto:info@chistyavto.ru">info@chistyavto.ru</a></p>
+</footer>
+
+</body>
+</html>
